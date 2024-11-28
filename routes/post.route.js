@@ -3,7 +3,7 @@ import express from "express";
 const router = express.Router();
 
 router.get("/test", (req, res) => {
-  res.send("are baba its workds");
+  res.send("this is working!");
   console.log("router work");
 });
 
