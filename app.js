@@ -8,6 +8,6 @@ app.use(express.json()); // to parse json request
 app.use("/api/posts", postRoute);
 app.use("/api/auth", authRoute);
 
-app.listen(8800, () => {
+app.listen(5000, () => {
   console.log("server is running");
 });
