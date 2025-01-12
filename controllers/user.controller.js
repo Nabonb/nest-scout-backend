@@ -103,10 +103,10 @@ export const savePost = async (req, res) => {
           postId,
         },
       });
-      res.status(200).json({ message: "Post added in saved list" });
+      res.status(200).json({ message: "Post saved" });
     }
   } catch (err) {
     console.log(err);
-    res.status(500).json({ message: "Failed to delete user" });
+    res.status(500).json({ message: "Failed to delete users!" });
   }
 };
