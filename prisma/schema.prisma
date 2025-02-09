@@ -22,6 +22,8 @@ model User {
   createdAt  DateTime    @default(now())
   posts      Post[]
   savedPosts SavedPost[]
+  chats      Chat[]      @relation(fields: [chatIDs], references: [id])
+  chatIDs    String[]    @db.ObjectId
 }
 
 model Post {
@@ -79,6 +81,26 @@ model SavedPost {
   createdAt DateTime @default(now())
 
   @@unique([userId, postId]) // cannot create same savedpost for the same user id and post.
+}
+
+model Chat {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  users       User[]    @relation(fields: [userIDs], references: [id])
+  userIDs     String[]  @db.ObjectId
+  createdAt   DateTime  @default(now())
+  seenBy      String[]  @db.ObjectId
+  messages    Message[]
+  lastMessage String?
+}
+
+model Message {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  text      String
+  userId    String
+  chat      Chat     @relation(fields: [chatId], references: [id])
+  chatId    String   @db.ObjectId
+  createdAt DateTime @default(now())
+  seenBy    String[] @db.ObjectId
 }
 
 //NOTE: npx prisma db push (after any changes into the prisma )
